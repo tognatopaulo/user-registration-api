@@ -31,6 +31,6 @@ jobs:
 
       - name: Build Quarkus Native Image
         run: |
-          ./mvnw clean package -Pnative -Dquarkus.native.container-build=true -Dquarkus.native.docker-build=true
-          ls -lh target/*
+          ./gradlew clean nativeCompile
+          ls -lh build/native/nativeCompile/
         
