@@ -1,0 +1,36 @@
+name: Deploy Serverless User Registration
+
+on:
+    push:
+        branches:
+        - main
+
+#env:
+#    AWS_REGION: us-east-1
+#    AWS_ACCOUNT_ID: 123456789012  # Replace with your AWS Account ID
+#    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'graalvm'
+          cache: 'maven'
+
+      - name: Build Quarkus Native Image
+        run: |
+          ./mvnw clean package -Pnative -Dquarkus.native.container-build=true -Dquarkus.native.docker-build=true
+          ls -lh target/*
+        
