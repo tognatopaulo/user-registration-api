@@ -32,6 +32,5 @@ jobs:
       - name: Build Quarkus Native Image
         run: |
           chmod +x ./gradlew
-          ./gradlew clean nativeCompile
-          ls -lh build/native/nativeCompile/
+          ./gradlew clean build
         
