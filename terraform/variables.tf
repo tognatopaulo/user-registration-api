@@ -12,7 +12,7 @@ variable "env" {
 
 variable "table_name" {
     type = string
-    default = "Users"
+    default = "users"
     description = "DynamoDB table name"
 }
 

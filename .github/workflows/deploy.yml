@@ -43,4 +43,8 @@ jobs:
       - name: Validar Terraform
         run: terraform validate
         working-directory: ./terraform
+
+      - name: Aplicar Terraform
+        run: terraform apply -auto-approve
+        working-directory: ./terraform
         
