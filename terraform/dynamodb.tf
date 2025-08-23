@@ -23,10 +23,6 @@ resource "aws_dynamodb_table" "user_table" {
     type = "S"
   }
 
-  point_in_time_recovery {
-    enabled = var.enable_point_in_time_recovery
-  }
-
   tags = {
     Environment = var.env
     Name        = local.user_table_name
