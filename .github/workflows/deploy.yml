@@ -38,9 +38,9 @@ jobs:
 
       - name: Inicializar Terraform
         run: terraform init
-        working-directory: ./infra
+        working-directory: ./terraform
 
       - name: Validar Terraform
         run: terraform validate
-        working-directory: ./infra
+        working-directory: ./terraform
         
