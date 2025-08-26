@@ -13,7 +13,7 @@ import java.util.*;
 @ApplicationScoped
 public class UserRepositoryDynamoDB implements UserRepository {
 
-    private static final String TABLE_NAME = "users-dev";
+    private static final String TABLE_NAME = "users";
 
     @Inject
     DynamoDbClient dynamoDbClient;

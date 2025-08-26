@@ -1,5 +1,5 @@
 locals {
-  user_table_name = "${var.table_name}-${var.env}"
+  user_table_name = var.table_name
 }
 
 resource "aws_dynamodb_table" "user_table" {
