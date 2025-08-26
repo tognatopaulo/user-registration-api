@@ -15,17 +15,17 @@ resource "aws_api_gateway_resource" "register" {
   path_part   = "register"
 }
 
-resource "aws_api_gateway_method" "register_post" {
+resource "aws_api_gateway_method" "post_register" {
   rest_api_id   = aws_api_gateway_rest_api.users_api.id
   resource_id   = aws_api_gateway_resource.register.id
   http_method   = "POST"
   authorization = "NONE"
 }
 
-resource "aws_api_gateway_integration" "register_post_lambda" {
+resource "aws_api_gateway_integration" "lambda_register" {
   rest_api_id             = aws_api_gateway_rest_api.users_api.id
   resource_id             = aws_api_gateway_resource.register.id
-  http_method             = aws_api_gateway_method.register_post.http_method
+  http_method             = aws_api_gateway_method.post_register.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.user_registration.invoke_arn
@@ -56,16 +56,16 @@ resource "aws_api_gateway_deployment" "users_api_deployment" {
   rest_api_id = aws_api_gateway_rest_api.users_api.id
   triggers = {
     redeployment = sha1(jsonencode([
-      aws_api_gateway_method.register_post.id,
-      aws_api_gateway_integration.register_post_lambda.id
+      aws_api_gateway_method.post_register.id,
+      aws_api_gateway_integration.lambda_register.id
     ]))
   }
   lifecycle {
     create_before_destroy = true
   }
   depends_on = [
-    aws_api_gateway_integration.register_post_lambda,
-    aws_api_gateway_method.register_post
+    aws_api_gateway_integration.lambda_register,
+    aws_api_gateway_method.post_register
   ]
 }
 
