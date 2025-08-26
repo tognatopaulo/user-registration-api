@@ -53,14 +53,20 @@ resource "aws_api_gateway_rest_api_policy" "open_policy" {
 }
 
 resource "aws_api_gateway_deployment" "users_api_deployment" {
-  depends_on  = [aws_api_gateway_integration.register_post_lambda]
   rest_api_id = aws_api_gateway_rest_api.users_api.id
   triggers = {
-    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.users_api))
+    redeployment = sha1(jsonencode([
+      aws_api_gateway_method.register_post.id,
+      aws_api_gateway_integration.register_post_lambda.id
+    ]))
   }
   lifecycle {
     create_before_destroy = true
   }
+  depends_on = [
+    aws_api_gateway_integration.register_post_lambda,
+    aws_api_gateway_method.register_post
+  ]
 }
 
 resource "aws_api_gateway_stage" "dev" {
