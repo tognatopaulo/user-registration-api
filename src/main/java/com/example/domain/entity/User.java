@@ -2,10 +2,8 @@ package com.example.domain.entity;
 
 import io.quarkus.elytron.security.common.BcryptUtil;
 
-import java.util.Random;
-
 public class User {
-    private int userId;
+    private String userId;
     private String userName;
     private String email;
     private String password;
@@ -13,7 +11,6 @@ public class User {
     private String activationCode;
 
     public User(String userName, String email, String password) {
-        this.userId = new Random().nextInt(1_000_000); // Simulating user ID generation
         this.userName = userName;
         this.email = email;
         setPassword(password);
@@ -25,11 +22,11 @@ public class User {
         return String.format("%06d", code);
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -51,6 +48,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = BcryptUtil.bcryptHash(password);
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public boolean checkPassword(String password) {

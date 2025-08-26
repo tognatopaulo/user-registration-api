@@ -1,7 +1,7 @@
 package com.example.adapter.http.api.dto;
 
 public class UserResponse {
-    private int userId;
+    private String userId;
     private String userName;
     private String email;
     private boolean isActive;
@@ -10,14 +10,14 @@ public class UserResponse {
         // Default constructor
     }
 
-    public UserResponse(int userId, String userName, String email, boolean isActive) {
+    public UserResponse(String userId, String userName, String email, boolean isActive) {
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

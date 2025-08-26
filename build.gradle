@@ -16,6 +16,8 @@ dependencies {
     implementation 'io.quarkus:quarkus-elytron-security-common:3.10.0'
     implementation 'io.quarkus:quarkus-jackson'
     implementation 'io.quarkus:quarkus-hibernate-validator'
+    implementation 'software.amazon.awssdk:dynamodb:2.25.10'
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.3'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }
