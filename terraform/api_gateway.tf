@@ -1,6 +1,6 @@
 resource "aws_api_gateway_rest_api" "users_api" {
   name        = "users-api-${var.env}"
-  description = "API Gateway para User Registration Lambda"
+  description = "API Gateway para registro de usuários"
 }
 
 resource "aws_api_gateway_resource" "users" {
@@ -15,17 +15,17 @@ resource "aws_api_gateway_resource" "register" {
   path_part   = "register"
 }
 
-resource "aws_api_gateway_method" "post_register" {
+resource "aws_api_gateway_method" "register_post" {
   rest_api_id   = aws_api_gateway_rest_api.users_api.id
   resource_id   = aws_api_gateway_resource.register.id
   http_method   = "POST"
   authorization = "NONE"
 }
 
-resource "aws_api_gateway_integration" "lambda_register" {
+resource "aws_api_gateway_integration" "register_post_lambda" {
   rest_api_id             = aws_api_gateway_rest_api.users_api.id
   resource_id             = aws_api_gateway_resource.register.id
-  http_method             = aws_api_gateway_method.post_register.http_method
+  http_method             = aws_api_gateway_method.register_post.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.user_registration.invoke_arn
@@ -36,7 +36,7 @@ resource "aws_lambda_permission" "apigw_lambda" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.user_registration.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.users_api.execution_arn}/*/POST/users/register"
+  source_arn    = "${aws_api_gateway_rest_api.users_api.execution_arn}/*/*"
 }
 
 resource "aws_api_gateway_rest_api_policy" "open_policy" {
@@ -53,7 +53,18 @@ resource "aws_api_gateway_rest_api_policy" "open_policy" {
 }
 
 resource "aws_api_gateway_deployment" "users_api_deployment" {
-  depends_on  = [aws_api_gateway_integration.lambda_register]
+  depends_on  = [aws_api_gateway_integration.register_post_lambda]
   rest_api_id = aws_api_gateway_rest_api.users_api.id
-  stage_name  = var.env
+  triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.users_api))
+  }
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_api_gateway_stage" "dev" {
+  deployment_id = aws_api_gateway_deployment.users_api_deployment.id
+  rest_api_id   = aws_api_gateway_rest_api.users_api.id
+  stage_name    = var.env
 }
