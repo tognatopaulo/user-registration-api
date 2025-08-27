@@ -22,6 +22,12 @@ resource "aws_apigatewayv2_stage" "dev" {
   api_id      = aws_apigatewayv2_api.users_api.id
   name        = var.env
   auto_deploy = true
+
+  # Adicione esta linha para garantir a ordem correta de dependência
+  depends_on = [
+    aws_apigatewayv2_route.post_register,
+    aws_apigatewayv2_integration.lambda_register # Embora a rota dependa da integração, é bom explicitar
+  ]
 }
 
 resource "aws_lambda_permission" "apigw_lambda" {
