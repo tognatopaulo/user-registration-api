@@ -31,7 +31,7 @@ jobs:
       - name: Build Quarkus Uber Jar
         run: |
           chmod +x ./gradlew
-          ./gradlew clean build -Dquarkus.package.type=uber-jar
+          ./gradlew clean build -Dquarkus.package.jar.type=uber
           ls -la ./build/
 
       - name: Instalar Terraform
