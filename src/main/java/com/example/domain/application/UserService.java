@@ -10,8 +10,11 @@ import java.util.List;
 @ApplicationScoped
 public class UserService {
 
-    @Inject
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<User> getUserList() {
         // Aqui você pode adicionar a lógica para buscar usuários do banco de dados

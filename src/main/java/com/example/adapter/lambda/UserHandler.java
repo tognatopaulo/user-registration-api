@@ -18,9 +18,9 @@ public class UserHandler implements RequestHandler<APIGatewayProxyRequestEvent, 
     private final UserService userService;
     private final ObjectMapper objectMapper;
 
-    public UserHandler() {
-        this.userService = new UserService(); // Ajuste conforme seu construtor real
-        this.objectMapper = new ObjectMapper();
+    public UserHandler(UserService userService, ObjectMapper objectMapper) {
+        this.userService = userService;
+        this.objectMapper = objectMapper;
     }
 
     @Override
