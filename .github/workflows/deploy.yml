@@ -32,10 +32,8 @@ jobs:
         run: |
           rm -rf ./build/
           chmod +x ./gradlew
-          ./gradlew clean build -Dquarkus.package.type=lambda
-          cd build
-          zip function.zip *-runner.jar
-          ls -la .
+          ./gradlew clean build
+          ls -la ./build/
 
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v3
