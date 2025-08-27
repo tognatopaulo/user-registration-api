@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform('io.quarkus:quarkus-bom:3.20.2.Final')
+    implementation platform('io.quarkus:quarkus-bom:3.20.0.Final')
     implementation 'io.quarkus:quarkus-resteasy'
     implementation 'io.quarkus:quarkus-resteasy-jackson'
     implementation 'io.quarkus:quarkus-amazon-lambda-http'
