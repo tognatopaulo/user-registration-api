@@ -31,7 +31,7 @@ jobs:
       - name: Build Quarkus Native Image
         run: |
           chmod +x ./gradlew
-          ./gradlew clean build
+          ./gradlew clean build -Dquarkus.package.type=uber-jar
 
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v3
