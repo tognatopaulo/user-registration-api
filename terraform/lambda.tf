@@ -4,8 +4,8 @@ resource "aws_lambda_function" "user_registration" {
   runtime       = "java17"
   role          = aws_iam_role.lambda_exec_role.arn
 
-  filename         = "${path.module}/../build/quarkus-app/userregistration-1.0-SNAPSHOT-runner.jar"
-  source_code_hash = filebase64sha256("${path.module}/../build/quarkus-app/userregistration-1.0-SNAPSHOT-runner.jar")
+  filename         = "${path.module}/../build/quarkus-app/quarkus-run.jar"
+  source_code_hash = filebase64sha256("${path.module}/../build/quarkus-app/quarkus-run.jar")
 
   environment {
     variables = {
