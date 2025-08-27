@@ -14,10 +14,10 @@ import java.util.*;
 public class UserRepositoryDynamoDB implements UserRepository {
 
     private static final String TABLE_NAME = "users";
-    private final DynamoDbClient dynamoDb;
+    private final DynamoDbClient dynamoDbClient;
 
-    public UserRepositoryDynamoDB(DynamoDbClient dynamoDb) {
-        this.dynamoDb = dynamoDb;
+    public UserRepositoryDynamoDB(DynamoDbClient dynamoDbClient) {
+        this.dynamoDbClient = dynamoDbClient;
     }
 
     @Override
