@@ -31,7 +31,7 @@ jobs:
       - name: Build Quarkus Native Image
         run: |
           chmod +x ./gradlew
-          ./gradlew quarkusBuild -Dquarkus.package.type=uber-jar
+          ./gradlew quarkusBuild -Dquarkus.package.jar.enabled=true -Dquarkus.package.jar.type=uber
           ls -la ./build/quarkus-app/
 
       - name: Instalar Terraform
