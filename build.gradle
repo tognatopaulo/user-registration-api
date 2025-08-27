@@ -18,6 +18,8 @@ dependencies {
     implementation 'io.quarkus:quarkus-elytron-security-common'
     implementation 'io.quarkus:quarkus-jackson'
     implementation 'software.amazon.awssdk:dynamodb:2.25.10'
+    implementation 'commons-logging:commons-logging:1.2'
+
 
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
