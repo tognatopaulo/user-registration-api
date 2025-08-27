@@ -28,11 +28,6 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
-      - name: Build Quarkus Native Image
-        run: |
-          chmod +x ./gradlew
-          ./gradlew clean build -Dquarkus.package.type=uber-jar
-
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v3
 
@@ -43,6 +38,10 @@ jobs:
       - name: Validar Terraform
         run: terraform validate
         working-directory: ./terraform
+      - name: Build Quarkus Native Image
+        run: |
+          chmod +x ./gradlew
+          ./gradlew clean build -Dquarkus.package.type=uber-jar
 
       - name: Aplicar Terraform
         run: terraform apply -auto-approve
