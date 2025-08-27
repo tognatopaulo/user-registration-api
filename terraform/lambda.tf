@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "user_registration" {
   function_name = "user-registration-${var.env}"
-  handler       = "io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest"
+  handler       = "com.example.adapter.lambda.UserHandler::handleRequest"
   runtime       = "java17"
   role          = aws_iam_role.lambda_exec_role.arn
 
