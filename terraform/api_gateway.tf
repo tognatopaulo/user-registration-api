@@ -75,6 +75,5 @@ resource "aws_api_gateway_stage" "dev" {
   stage_name    = var.env
   lifecycle {
     prevent_destroy = false
-    ignore_changes  = all
   }
 }
