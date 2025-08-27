@@ -12,6 +12,7 @@ import com.example.infra.persistence.UserRepositoryDynamoDB;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 public class UserHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
@@ -21,7 +22,8 @@ public class UserHandler implements RequestHandler<APIGatewayProxyRequestEvent, 
     private final ObjectMapper objectMapper;
 
     public UserHandler() {
-        UserRepositoryDynamoDB userRepository = new UserRepositoryDynamoDB();
+        DynamoDbClient dynamoDbClient = DynamoDbClient.create();
+        UserRepositoryDynamoDB userRepository = new UserRepositoryDynamoDB(dynamoDbClient);
         this.userService = new UserService(userRepository);
         this.objectMapper = new ObjectMapper();;
     }
