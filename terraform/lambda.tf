@@ -5,7 +5,7 @@ resource "aws_lambda_function" "user_registration" {
   role          = aws_iam_role.lambda_exec_role.arn
 
   filename         = "${path.module}/../build/function.zip"
-  source_code_hash = filebase64sha256("${path.module}/../build/build/function.zip")
+  source_code_hash = filebase64sha256("${path.module}/../build/function.zip")
 
   environment {
     variables = {
