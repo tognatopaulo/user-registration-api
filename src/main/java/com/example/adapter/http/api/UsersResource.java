@@ -52,6 +52,7 @@ public class UsersResource {
         var response = userService.registerUser(userRequest);
         var userResponse = UserMapper.toResponse(response);
         log.info("User registered successfully: {}", objectMapper.writeValueAsString(response));
-        return Response.ok(userResponse).build();
+        return Response.status(Response.Status.CREATED).entity(userResponse).build();
+
     }
 }
