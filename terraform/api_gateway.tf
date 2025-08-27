@@ -73,4 +73,8 @@ resource "aws_api_gateway_stage" "dev" {
   deployment_id = aws_api_gateway_deployment.users_api_deployment.id
   rest_api_id   = aws_api_gateway_rest_api.users_api.id
   stage_name    = var.env
+  lifecycle {
+    prevent_destroy = false
+    ignore_changes  = all
+  }
 }
