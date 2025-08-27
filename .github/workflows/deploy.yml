@@ -30,6 +30,7 @@ jobs:
 
       - name: Build Quarkus Uber Jar
         run: |
+          rm -rf ./build/
           chmod +x ./gradlew
           ./gradlew clean build --refresh-dependencies -Dquarkus.package.jar.type=uber-jar
           ls -la ./build/
