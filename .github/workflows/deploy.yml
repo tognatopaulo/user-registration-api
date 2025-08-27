@@ -28,10 +28,10 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
-      - name: Build Quarkus Native Image
+      - name: Build Quarkus Uber Jar
         run: |
           chmod +x ./gradlew
-          ./gradlew build -Dquarkus.native.enabled=true
+          ./gradlew clean quarkusBuild -Dquarkus.package.jar.enabled=true -Dquarkus.package.jar.type=uber
           ls -la ./build/quarkus-app/
 
       - name: Instalar Terraform
