@@ -6,7 +6,7 @@ plugins {
 ext {
     quarkusPlatformGroupId = 'io.quarkus'
     quarkusPlatformArtifactId = 'quarkus-bom'
-    quarkusPlatformVersion = '3.10.0' // ajuste para a versão desejada
+    quarkusPlatformVersion = '3.12.0'
 }
 
 repositories {
