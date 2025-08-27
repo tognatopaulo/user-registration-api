@@ -6,7 +6,9 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.example.adapter.http.api.dto.UserRequest;
 import com.example.adapter.http.api.mapper.UserMapper;
+import com.example.adapter.persistence.UserRepository;
 import com.example.domain.application.UserService;
+import com.example.infra.persistence.UserRepositoryDynamoDB;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +20,10 @@ public class UserHandler implements RequestHandler<APIGatewayProxyRequestEvent, 
     private final UserService userService;
     private final ObjectMapper objectMapper;
 
-    public UserHandler(UserService userService, ObjectMapper objectMapper) {
-        this.userService = userService;
-        this.objectMapper = objectMapper;
+    public UserHandler() {
+        UserRepositoryDynamoDB userRepository = new UserRepositoryDynamoDB();
+        this.userService = new UserService(userRepository);
+        this.objectMapper = new ObjectMapper();;
     }
 
     @Override
