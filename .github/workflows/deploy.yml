@@ -35,7 +35,7 @@ jobs:
           ./gradlew clean build -Dquarkus.package.jar.type=legacy-jar
           cd build
           zip function.zip *-runner.jar
-          ls -la ./build/
+          ls -la .
 
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v3
