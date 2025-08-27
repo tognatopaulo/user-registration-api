@@ -3,6 +3,7 @@ resource "aws_lambda_function" "user_registration" {
   handler       = "com.example.adapter.lambda.UserHandler::handleRequest"
   runtime       = "java17"
   role          = aws_iam_role.lambda_exec_role.arn
+  timeout       = 30
 
   filename         = "${path.module}/../build/function.zip"
   source_code_hash = filebase64sha256("${path.module}/../build/function.zip")
