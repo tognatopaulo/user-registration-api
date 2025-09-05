@@ -19,7 +19,7 @@ dependencies {
     implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-elytron-security-common'
     implementation 'io.quarkus:quarkus-jackson'
-//    implementation 'software.amazon.awssdk:dynamodb:2.25.10'
+    implementation 'software.amazon.awssdk:dynamodb:2.25.10'
     implementation 'commons-logging:commons-logging:1.2'
 }
 
