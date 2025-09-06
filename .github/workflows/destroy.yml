@@ -33,6 +33,10 @@ jobs:
         run: terraform init
         working-directory: ./terraform
 
+      - name: Criar arquivo function.zip vazio
+        run: mkdir -p ./build && zip -j ./build/function.zip /dev/null
+        working-directory: ./terraform
+
       - name: Destruir Infraestrutura
         run: terraform destroy -auto-approve
         working-directory: ./terraform
