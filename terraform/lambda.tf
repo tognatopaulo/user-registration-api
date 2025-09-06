@@ -1,5 +1,4 @@
 resource "aws_lambda_function" "user_registration" {
-  count            = var.create_lambda ? 1 : 0
   function_name = "user-registration-${var.env}"
   handler       = "com.example.adapter.lambda.UserHandler::handleRequest"
   runtime       = "java17"

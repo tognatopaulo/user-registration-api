@@ -7,7 +7,7 @@ resource "aws_apigatewayv2_api" "users_api" {
 resource "aws_apigatewayv2_integration" "lambda_register" {
   api_id                 = aws_apigatewayv2_api.users_api.id
   integration_type       = "AWS_PROXY"
-  integration_uri        = aws_lambda_function.user_registration[0].invoke_arn
+  integration_uri        = aws_lambda_function.user_registration.invoke_arn
   integration_method     = "POST"
   payload_format_version = "2.0"
 }
@@ -33,7 +33,7 @@ resource "aws_apigatewayv2_stage" "dev" {
 resource "aws_lambda_permission" "apigw_lambda" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.user_registration[0].function_name
+  function_name = aws_lambda_function.user_registration.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.users_api.execution_arn}/*/*"
 }

@@ -26,6 +26,13 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
+      - name: Build Quarkus Uber Jar
+        run: |
+          rm -rf ./build/
+          chmod +x ./gradlew
+          ./gradlew clean build
+          ls -la ./build/
+
       - name: Instalar Terraform
         uses: hashicorp/setup-terraform@v3
 
@@ -33,6 +40,10 @@ jobs:
         run: terraform init
         working-directory: ./terraform
 
+      - name: Validar Terraform
+        run: terraform validate
+        working-directory: ./terraform
+
       - name: Destruir Infraestrutura
-        run: terraform destroy -auto-approve -var-file=destroy.tfvars
+        run: terraform destroy -auto-approve
         working-directory: ./terraform
