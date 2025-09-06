@@ -15,3 +15,8 @@ variable "table_name" {
     default = "users"
     description = "DynamoDB table name"
 }
+
+variable "create_lambda" {
+  type    = bool
+  default = true
+}
