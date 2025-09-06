@@ -3,7 +3,6 @@ package com.example.infra.persistence;
 import com.example.adapter.persistence.UserRepository;
 import com.example.domain.entity.User;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
