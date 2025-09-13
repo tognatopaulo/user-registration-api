@@ -53,6 +53,18 @@ public class UserRepositoryDynamoDB implements UserRepository {
 
     @Override
     public List<User> findAllUsers() {
-        return List.of();
+        return dynamoDbClient.scan(b -> b.tableName(TABLE_NAME))
+                .items().stream()
+                .map(item -> {
+                    User user = new User();
+                    user.setUserId(item.get("userId").s());
+                    user.setUserName(item.get("userName").s());
+                    user.setEmail(item.get("email").s());
+                    user.setPassword(item.get("password").s());
+                    user.setActive(item.get("isActive").bool());
+                    user.setActivationCode(item.get("activationCode").s());
+                    return user;
+                })
+                .toList();
     }
 }

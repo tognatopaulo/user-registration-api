@@ -12,6 +12,8 @@ public class User {
     private boolean isActive;
     private String activationCode;
 
+    public User() {}
+
     public User(String userName, String email, String password) {
         this.userId = UUID.randomUUID().toString();
         this.userName = userName;
