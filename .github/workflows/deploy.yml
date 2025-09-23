@@ -1,4 +1,4 @@
-name: Destroy Serverless User Registration
+name: Deploy Serverless User Registration
 
 on:
   workflow_dispatch:
