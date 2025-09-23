@@ -1,7 +1,10 @@
 name: Deploy Serverless User Registration
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - sprint3
 
 env:
   AWS_REGION: us-east-1
@@ -9,7 +12,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
-  destroy:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
